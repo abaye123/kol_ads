@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+    <title>האתר של אביי</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Rubik, sans-serif;
+            background-color: #f7f5ff;
+            color: #370fff;
+        }
+
+        header {
+            background-color: #162eff;
+            color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: bold;
+
+        }
+
+        nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #d4ff00;
+        }
+
+        main {
+            margin-top: 100px;
+            padding: 40px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        h4 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #0123ff;
+        }
+
+        lil {
+            font-size: 28px;
+            line-height: 4;
+            margin-bottom: 20px;
+            color: #f7f5ff;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        ul li a {
+            color: #4A90E2;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        ul li a:hover {
+            color: #333333;
+        }
+
+        footer {
+            background-color: #FFFFFF;
+            padding: 9px;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            text-align: center;
+            font-size: 14px;
+            color: #AAAAAA;
+        }
+
+        footer:hover {
+            color: #0561ff;
+        }
+
+        .floating-bubbles {
+            position: fixed;
+            left: 20px;
+            top: 73%;
+            transform: translateY(-50%);
+        }
+
+        .floating-bubbles a {
+            display: block;
+            width: 50px;
+            height: 50px;
+            background-color: #f7f5ff;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .floating-bubbles a:hover {
+            display: block;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .floating-bubbles a img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        .floating-bubbles a:hover img {
+            transform: scale(1.2);
+        }
+
+        #popup {
+            display: none;
+            position: fixed;
+            top: 10%;
+            left: 10%;
+            width: 80%;
+            height: 80%;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+            z-index: 9999;
+        }
+
+        .close-btn {
+            font-size: 25px;
+            font-weight: bold;
+            color: #000;
+            cursor: pointer;
+        }
+
+        .content {
+            width: 100%;
+            height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: #162eff;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        #scroll-progress-bar {
+            width: 0;
+            height: 100%;
+            background-color: #182ce1;
+            transition: width 0.2s ease-in-out;
+        }
+
+        nav a.active {
+            border-bottom: 1.5px dashed yellow;
+        }
+
+        *::-webkit-scrollbar {
+            width: 0px;
+        }
+
+        .moving-image {
+            position: fixed;
+            /* Make the image position absolute */
+            bottom: 10%;
+            /* Position the image at the bottom of the screen */
+            right: 10%;
+            /* Position the image at the right of the screen */
+            animation: moveImage 5s infinite;
+            /* Use the moveImage animation for 5 seconds and repeat infinitely */
+        }
+
+        /* Set up the animation */
+        @keyframes moveImage {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            25% {
+                transform: translate(75%, -75%) rotate(25deg);
+                animation-timing-function: ease-out;
+            }
+
+            50% {
+                transform: translate(150%, -150%) rotate(-25deg);
+                animation-timing-function: ease-in;
+            }
+
+            75% {
+                transform: translate(420%, -75%) rotate(0deg);
+                animation-timing-function: ease-out;
+            }
+            
+            90% {
+                transform: translate(0, 0) rotate(45deg);
+                animation-timing-function: ease-in;
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+                animation-timing-function: ease-in;
+            }
+        }
+
+        /* Apply the animation to the image */
+        .moving-image {
+            animation: moveImage 20s infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="scroll-progress">
+        <div id="scroll-progress-bar"></div>
+    </div>
+    <!-- Your page content goes here -->
+    <script>
+        window.addEventListener('scroll', function () {
+            const scrollBar = document.getElementById('scroll-progress-bar');
+            const maxScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const percentage = (window.pageYOffset / maxScroll) * 100;
+            scrollBar.style.width = percentage + '%';
+        });
+    </script>
+
+    <header>
+        <h1> 🐔 האתר של אביי</h1>
+        <nav>
+            <ul>
+                <li><a class="about" href="#about">קצת עלי</a></li>
+                <li><a class="services" href="#services">שירותים מיוחדים</a></li>
+                <li><a class="products" href="#products">המוצרים שלנו</a></li>
+                <li><a class="contact" onclick="openPopup()">הלינקיה</a></li>
+                <li><a class="contact" href="#contact">צור קשר</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- JavaScript to add the active class to the currently viewed section -->
+    <script>
+        window.addEventListener('scroll', function () {
+            // Get the position of each section
+            const aboutPosition = document.getElementById('about').getBoundingClientRect();
+            const servicesPosition = document.getElementById('services').getBoundingClientRect();
+            const productsPosition = document.getElementById('products').getBoundingClientRect();
+            const contactPosition = document.getElementById('contact').getBoundingClientRect();
+
+            // Check if each section is in view
+            const isInView = {
+                about: aboutPosition.top <= window.innerHeight && aboutPosition.bottom >= 0,
+                services: servicesPosition.top <= window.innerHeight && servicesPosition.bottom >= 0,
+                products: productsPosition.top <= window.innerHeight && productsPosition.bottom >= 0,
+                contact: contactPosition.top <= window.innerHeight && contactPosition.bottom >= 0,
+            };
+
+            // Add or remove the active class depending on whether the section is in view
+            const links = document.querySelectorAll('nav a');
+            links.forEach(link => {
+                if (isInView[link.classList[0]]) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
+    <main>
+        <section id="about">
+            <lil>:)</lil>
+            <h2>קצת עלי...</h2>
+            <p>אני מציע שירות של פיתוח מתקדם במערכות של ימות המשיח וביישומי גוגל השונים, גימייל, דרייב, גוגל צ'אט, גוגל
+                דוקס, גוגל שיטס, גוגל סקריפט, פלטפורמת גוגל קלאוד מיקרוסופט אז'ור ועוד... יש לנו עשרות לקוחות מרוצים
+                מפיתוח של מערכות מתקדמות לניהול תכנים בימות המשיח והעלאת הודעות אוטומטית היישר מהמייל או מהגוגל שיטס,
+                אינטראקציות בין שירותים שונים, ובעיקר פתרונות יצירתיים במחירים זולים וחד פעמיים.</p>
+
+        </section>
+
+        <section id="services">
+            <lil>:)</lil>
+            <h2>שירותים מיוחדים</h2>
+            <p>אני מציע שירות של פיתוח מתקדם במערכות של ימות המשיח וביישומי גוגל השונים, גימייל, דרייב, גוגל צ'אט, גוגל
+                דוקס, שיטס ועוד... יש לנו עשרות לקוחות מרוצים מפיתוח של מערכות מתקדמות לניהול תכנים בימות המשיח והעלאת
+                הודעות אוטומטית היישר מהמייל או מהגוגל שיטס, אינטראקציות בין שירותים שונים, ובעיקר פתרונות יצירתיים
+                במחירים זולים וחד פעמיים.</p>
+            <p>יודעים מה? עזבו, פשוט תבררו..</p>
+        </section>
+
+        <section id="products">
+            <lil>:)</lil>
+            <h2>המוצרים שלנו</h2>
+            <h3>כאן תוכלו לראות חלק מהמוצרים שאנו מציעים לקהל הרחב, בנוסף תמיד אפשר לקבל התאמה אישית...</h3>
+            <ul>
+                <section id="mailtok"></section>
+                <h4>🔔 מיילטוק 8.0.0</h4>
+                <p>מיילטוק. המייל הטלפוני, שירות חינמי לשליחת וקבלת הודעות המייל שלכם היישר מהטלפון הקשר באמצעות מערכת
+                    טלפונית משוכללת בעלות שיחה רגילה</p>
+                <li><a href="https://tchumim.com/post/143857">לחצו כאן למעבר להדרכה על התקנת המוצר</a></li>
+        </section>
+        <h4>🗑️ אימייל קלינר</h4>
+        <p>אתם מנויים לניוזלטר כלשהו? אולי להתראות מהפורום הזה? או שסתם נמאס לכם לראות את ההתראות של גוגל?
+            היישום Email cleaner הוא בדיוק בשבילכם! ניתן להגדיר רשימה של עד 11 תוויות ורשימה של עד 11 כתובות של
+            שולחי מיילים שיימחקו מהמייל שלכם אחת לשבוע היישר אל הזבל. בנוסף ניתן להגדיר שמיילים חדשים בטווח של
+            פחות מx ימים לא יימחקו.</p>
+        <li><a href="https://mitmachim.top/post/615599">לחצו כאן למעבר להדרכה על התקנת המוצר</a></li>
+
+        <h4>🗂️ דרייב מנג'ר</h4>
+        <p>אז ככה, מכיון שאני די חובב של אבטחת מידע וכו', אני אוהב מידי פעם להסיר הרשאות שיתוף ישנות לקבצים
+            בגוגל דרייב שלי, ולפני כמה חודשים כתבתי יישום נחמד שיעזור לי לדעת איזה קבצים משותפים ועם מי ולהסיר
+            מהם את ההרשאות וכו', כמו"כ הוספתי לו עוד כמה אפשרויות, כמו מחיקת קבצים, סימון בכוכב ועוד...</p>
+        <li><a href="https://mitmachim.top/post/613566">לחצו כאן למעבר להדרכה על התקנת המוצר</a></li>
+
+        <h4>📧 אימייל יונרד</h4>
+        <p>גם אתם כמוני מסמנים כלא נקרא את ההודעות שאתם דוחים את הטיפול שלהם להמשך? ואז פתאום ההודעות נעלמות
+            לתהום הנשיה כי קיבלתם יותר מידי מיילים השבוע? אם כן, היישום הזה הוא בדיוק בשבילכם! היישום עובר תוך
+            שניות (ממש! אצלי יש כ3000 הודעות וזמן הריצה כולו הוא כ10 שניות) על כל תוכן תיבת המייל שלכם, ורושם
+            מידע אודות ההודעות שלא נקראו, השולח, התאריך, הנושא ולינק ישיר להודעה הספציפית.</p>
+        <li><a href="https://mitmachim.top/post/615572">לחצו כאן למעבר להדרכה על התקנת המוצר</a></li>
+
+        <h4>🔔 SMS למייל</h4>
+        <p>רוצים לקבל את האס.אם.אס מהמספר הוירטואלי של ימות המשיח ישירות למייל שלכם? או אולי ל2 מיילים? היישום
+            הזה ישלח אליכם את הסמסים הנכנסים ישירות אל תיבת המייל האישית שלכם</p>
+        <li><a href="mailto:cs@abaye.ml">לחצו כאן לקבלת פרטים והצעמ"ח אישית</a></li>
+
+        <h4>🏷️ Email Tagger v1.0</h4>
+        <p>יישום חדשני שמסייע לכם לא לטבוע בעשרות המיילים שאתם מקבלים, סימון מיוחד למיילים חשובים שנשלחו אליכם
+            מאנשי הקשר שלכם או מקרוביכם!</p>
+        <li><a href="mailto:cs@abaye.ml">לחצו כאן לקבלת פרטים והצעמ"ח אישית</a></li>
+        </ul>
+        </section>
+
+        <lil>:)</lil>
+
+        <section id="contact">
+            <h2>צור קשר</h2>
+            <p>יש לך כאן את כל הפרטים. נשמח לשמוע ממך.</p>
+            <ul>
+                <li>📧 cs@abaye.ml</li>
+                <li>🏡 סוף העולם, ימינה! לא ⬅️</li>
+                <li>☕ <a href="https://www.buymeacoffee.com/abaye">קנה לי קפה.</a></li>
+                <lil class="moving-image">🐔</lil>
+                <lil>🐔</lil>
+
+            </ul>
+        </section>
+    </main>
+
+    <div class="floating-bubbles">
+        <a href="https://github.com/YOSSI263"><img src="/img/GitHub.png"></a>
+        <a href="https://www.buymeacoffee.com/abaye"><img
+                src="https://www.buymeacoffee.com/assets/img/bmc-meta-new/new/apple-icon-76x76.png"></a>
+    </div>
+
+    <script>
+        function openPopup() {
+            document.getElementById("popup").style.display = "flex";
+        }
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+    </script>
+
+    <div id="popup">
+        <div class="header">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+        </div>
+        <div class="content">
+            <iframe src="/link.html" frameborder="0"></iframe>
+        </div>
+    </div>
+    <footer>
+        <p>Copyright &copy; 2023 My Website by abaye</p>
+    </footer>
+</body>
+
+</html>
